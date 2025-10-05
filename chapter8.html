@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>wybór</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #222;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+        .battle-container {
+            display: flex;
+            justify-content: center;
+            gap: 2em;
+            margin: 2em 0;
+        }
+        .ui-box {
+            background: #fff;
+            border: 2px dashed #e74c3c;
+            padding: 2em;
+            width: 300px;
+            box-shadow: 0 0 10px #ccc;
+            position: relative;
+        }
+        .ui-box h2 {
+            margin-top: 0;
+            color: #e74c3c;
+        }
+        .vote-btn {
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 0.5em 1em;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 1em;
+            border-radius: 5px;
+        }
+        .votes {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #222;
+            color: #fff;
+            padding: 0.3em 0.7em;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            padding: 1em;
+            background: #222;
+            color: #fff;
+            margin-top: 2em;
+        }
+        /* Rainbow scrollbar (for Chrome/Edge) */
+        .rainbow-scrollbar::-webkit-scrollbar {
+            width: 16px;
+        }
+        .rainbow-scrollbar::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            border-radius: 8px;
+        }
+        .rainbow-scrollbar {
+            scrollbar-color: red orange;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Wybór</h1>
+        <p>Vote for the UI design!</p>
+    </header>
+    <div class="battle-container" id="battle">
+        <div class="ui-box" id="ui1">
+            <span class="votes" id="votes1">0</span>
+            <h2>Comic Sans Everywhere</h2>
+            <p style="font-family: 'Comic Sans MS', cursive, sans-serif;">
+                Wszystko to comic sans. Przyciski, etykiety, błędy - wszystko!
+            </p>
+            <button class="vote-btn" onclick="vote(1)">Vote</button>
+        </div>
+        <div class="ui-box" id="ui2">
+            <span class="votes" id="votes2">0</span>
+            <h2>Rainbow Scrollbars</h2>
+            <p>
+                Pasek przewijania, który zmienia kolor jak tęcza!
+            </p>
+            <button class="vote-btn" onclick="vote(2)">Vote</button>
+        </div>
+    </div>
+    <footer>
+        sprawdz to 👉 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" style="color:#e74c3c;">klik</a>
+    </footer>
+    <script>
+        let votes = [0, 0];
+        function vote(idx) {
+            votes[idx - 1]++;
+            document.getElementById('votes' + idx).textContent = votes[idx - 1];
+            // After voting, check which has more votes and switch UI
+            if (votes[0] > votes[1]) {
+                showComicSansUI();
+            } else if (votes[1] > votes[0]) {
+                showRainbowScrollbarUI();
+            }
+        }
+
+        function showComicSansUI() {
+            document.body.style.fontFamily = "'Comic Sans MS', cursive, sans-serif";
+            document.body.style.background = "#fffbe7";
+            document.getElementById('battle').innerHTML = `
+                <div class="ui-box" style="font-family: 'Comic Sans MS', cursive, sans-serif;">
+                    <h2 style="color:#e74c3c;">Comic Sans Everywhere</h2>
+                    <p>Gratulacje! Wybrałeś design: <b>Comic Sans Everywhere</b>.</p>
+                    <p>Przykładowy tekst w Comic Sans:</p>
+                    <ul>
+                        <li>Przycisk: <button style="font-family: 'Comic Sans MS', cursive, sans-serif;">Kliknij mnie!</button></li>
+                        <li>Label: <span style="font-family: 'Comic Sans MS', cursive, sans-serif;">To jest etykieta</span></li>
+                        <li>Error: <span style="color:red; font-family: 'Comic Sans MS', cursive, sans-serif;">Błąd! Coś poszło nie tak!</span></li>
+                    </ul>
+                </div>
+            `;
+        }
+
+        function showRainbowScrollbarUI() {
+            document.body.style.fontFamily = "Arial, sans-serif";
+            document.body.style.background = "#f8f8f8";
+            document.getElementById('battle').innerHTML = `
+                <div class="ui-box rainbow-scrollbar" style="height:200px; overflow-y:auto;">
+                    <h2 style="color:#e74c3c;">Rainbow Scrollbars</h2>
+                    <p>Gratulacje! Wybrałeś design: <b>Rainbow Scrollbars</b>.</p>
+                    <div id="rainbow-content">
+                        <p>Przewiń, aby zobaczyć tęczowy pasek przewijania!</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <p>Vivamus luctus urna sed urna ultricies ac tempor dui sagittis.</p>
+                        <p>In condimentum facilisis porta.</p>
+                        <p>Morbi nec metus.</p>
+                        <p>Nulla facilisi.</p>
+                        <p>Etiam sit amet orci eget eros faucibus tincidunt.</p>
+                        <p>Duis leo.</p>
+                        <p>Sed fringilla mauris sit amet nibh.</p>
+                        <p>Donec sodales sagittis magna.</p>
+                        <p>Sed consequat, leo eget bibendum sodales, augue velit cursus nunc.</p>
+                    </div>
+                </div>
+            `;
+            startRainbowScrollbar();
+        }
+
+        // Optional: Animate rainbow scrollbar thumb color
+        function startRainbowScrollbar() {
+            const colors = [
+                'red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'
+            ];
+            let idx = 0;
+            setInterval(() => {
+                const box = document.querySelector('.rainbow-scrollbar');
+                if (box) {
+                    box.style.setProperty('--scrollbar-thumb', colors[idx]);
+                    box.style.scrollbarColor = colors[idx] + ' orange';
+                    idx = (idx + 1) % colors.length;
+                }
+            }, 1000);
+        }
+    </script>
+    <nav style="text-align:center; margin:2em 0;">
+        <a href="index.html" style="color:#e74c3c; margin-right:2em;">Strona główna</a>
+        <a href="chapter9.html" style="color:#e74c3c;">Następny rozdział</a>
+    </nav>
+</body>
+</html>
