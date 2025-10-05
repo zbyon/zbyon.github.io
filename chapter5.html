@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Wybierz Piosenkę</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 24px;
+            text-align: center;
+        }
+        .music-icon {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 16px;
+        }
+        select {
+            width: 80%;
+            padding: 8px;
+            font-size: 1em;
+            margin-bottom: 16px;
+        }
+        .song-info {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        audio {
+            margin-top: 16px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Wybierz swoją piosenkę:</h2>
+        <select id="songSelect">
+            <option value="" data-icon="" disabled selected>-- Wybierz --</option>
+            <option value="audio.mp3" data-icon="shrek.png">audio.mp3</option>
+            <!-- Dodaj kolejne opcje z różnymi ikonami -->
+            <option value="song2.mp3" data-icon="icon2.png">song2.mp3</option>
+            <option value="song3.mp3" data-icon="icon3.png">song3.mp3</option>
+        </select>
+        <div class="song-info" id="songInfo"></div>
+        <img id="songIcon" src="" alt="Ikona piosenki" class="music-icon" style="display:none;">
+        <audio id="audioPlayer" controls style="display:none;">
+            <source id="audioSource" src="" type="audio/mpeg">
+            Twoja przeglądarka nie obsługuje elementu audio.
+        </audio>
+    </div>
+    <script>
+        const select = document.getElementById('songSelect');
+        const info = document.getElementById('songInfo');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const audioSource = document.getElementById('audioSource');
+        const songIcon = document.getElementById('songIcon');
+
+        select.addEventListener('change', function() {
+            const selectedOption = select.options[select.selectedIndex];
+            const file = select.value;
+            const icon = selectedOption.getAttribute('data-icon');
+            info.textContent = `Wybrana piosenka: ${file}`;
+            audioSource.src = file;
+            audioPlayer.load();
+            audioPlayer.style.display = 'block';
+            if (icon) {
+                songIcon.src = icon;
+                songIcon.style.display = 'inline-block';
+            } else {
+                songIcon.style.display = 'none';
+            }
+        });
+    </script>
+    <div style="text-align:center; margin-top:24px;">
+        <span style="font-size:1.3em; font-weight:bold;">
+            zapraszam do <a href="index.html">strony głównej</a>
+        </span>
+    </div>
+    <div style="text-align:center; margin-top:16px;">
+        <span style="font-size:1.1em;">
+            Przejdź do <a href="chapter6.html">rozdziału 6</a>
+        </span>
+    </div>
+    <h1r>
+        <a href="spis-treści.html">Spis treści</a>
+</body>
+</html>

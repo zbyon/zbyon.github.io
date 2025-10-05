@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>You Are An Idiot</title>
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .message {
+            font-size: 3em;
+            margin-top: 20vh;
+            animation: shake 0.5s infinite;
+        }
+        @keyframes shake {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(-10px, 0); }
+            50% { transform: translate(10px, 0); }
+            75% { transform: translate(-10px, 0); }
+            100% { transform: translate(0, 0); }
+        }
+        .face {
+            font-size: 5em;
+            margin-top: 2em;
+            animation: bounce 1s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="message">You Are An Idiot!</div>
+    <div class="face">😜</div>
+    <audio autoplay loop>
+        <source src="https://www.myinstants.com/media/sounds/you-are-an-idiot.mp3" type="audio/mpeg">
+    </audio>
+</body>
+</html>
